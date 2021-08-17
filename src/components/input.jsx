@@ -17,8 +17,8 @@ export default function Input() {
     }
 
     function handleClick() {
-        if (isNaN(resinInputted) === true || resinInputted < 0 || resinInputted > 160 || resinInputted === "") {
-            alert("Please enter a value that is not lesser than 0 or greater than 160");
+        if (isNaN(resinInputted) === true || resinInputted < 0 || resinInputted >= 160 || resinInputted === "") {
+            alert("Please enter a value that is not lesser than 0 or greater/equal to 160");
         } 
         else {
             isInputted = true;
@@ -149,7 +149,7 @@ export default function Input() {
             <div className="container">
                 
                 <div className="input-area flow-text">
-                    <p>Input Your Current Resin: (0-160)</p> 
+                    <p>Input Your Current Resin: (0-159)</p> 
                 </div>
 
                 <div className="row">
