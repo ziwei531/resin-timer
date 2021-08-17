@@ -42,7 +42,7 @@ export default function Input() {
         let result = m.add(totalWaitTime, 'minutes').format('LT');
         setRefill(result);
 
-        console.log("Time it should be refilled: " + result);
+        // console.log("Time it should be refilled: " + result);
 
         // console.log("The m value = " + m)
         m = moment();
@@ -89,7 +89,7 @@ export default function Input() {
         let time40 = till40 * 8;
         let time60 = till60 * 8;
 
-        console.log(time60)
+        // console.log(time60)
 
         let result20 = moment().add(time20, 'minutes').format('LT');
         let result30 = moment().add(time30, 'minutes').format('LT');
@@ -113,13 +113,13 @@ export default function Input() {
         }
         else if (input < 30 && input >= 20) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = '<div class="col l4 m12">' +
+            resultWhen.innerHTML = '<div class="col l4">' +
                                     "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l4 m12">' +
+                                    '<div class="col l4">' +
                                     "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l4 m12">' +
+                                    '<div class="col l4">' +
                                     "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
                                     "</div>"
         }
@@ -137,12 +137,10 @@ export default function Input() {
             resultWhen.innerHTML =  "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>`     
         }
                                     
-
-
-        console.log(result20);
-        console.log(result30);
-        console.log(result40);
-        console.log(result60);
+        // console.log(result20);
+        // console.log(result30);
+        // console.log(result40);
+        // console.log(result60);
         
     }
 
