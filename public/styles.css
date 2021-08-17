@@ -1,0 +1,46 @@
+.background {
+    background-color: #d9cad9;
+    padding: 5px;
+}
+
+.bullets {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 20px;
+}
+
+.fyi {
+    padding: 1px;
+}
+
+li {
+    font-size: 14px;
+    font: bold;
+    margin-left: 10px;
+    list-style-type: disc;
+}
+
+.input-area {
+    display: flex;
+    justify-content: center;
+}
+
+.input-number {
+    text-align: center;
+}
+
+.button-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculate-btn {
+    background-color:  #a767a7 !important;
+}
+
+.result {
+    position: relative;
+    bottom: 35px;
+}
