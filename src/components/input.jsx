@@ -35,15 +35,15 @@ export default function Input() {
         let toBeRegenerated = 160 - resinInputted;
         let totalWaitTime = toBeRegenerated * 8;
 
-        console.log("To be regenerated: " + toBeRegenerated);
-        console.log("Total wait time: " + totalWaitTime);
+        // console.log("To be regenerated: " + toBeRegenerated);
+        // console.log("Total wait time: " + totalWaitTime);
 
         let result = m.add(totalWaitTime, 'minutes').format('LTS');
         setRefill(result);
 
-        console.log("Time it should be refilled: " + result);
+        // console.log("Time it should be refilled: " + result);
 
-        console.log("The m value = " + m)
+        // console.log("The m value = " + m)
         m = moment();
         
     }
@@ -82,7 +82,7 @@ export default function Input() {
         <>
             <div className="container">
                 
-                <div className="input-area">
+                <div className="input-area flow-text">
                     <p>Input Your Current Resin: (0-160)</p> 
                 </div>
 
