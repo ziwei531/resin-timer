@@ -98,25 +98,43 @@ export default function Input() {
 
         if (input < 20) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = "<h4>20 Resin In: </h4>" + `<h1 class="result">${result20}</h1>` + "<br>" + 
-                                    "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + "<br>" +
-                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + "<br>" +
-                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+            resultWhen.innerHTML = '<div class="col l3 m12">' +
+                                    "<h4>20 Resin In: </h4>" + `<h1 class="result">${result20}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l3 m12">' +
+                                    "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l3 m12">' +
+                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l3 m12">' +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
+                                    '</div>'
         }
         else if (input < 30 && input >= 20) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + "<br>" +
-                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + "<br>" +
-                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+            resultWhen.innerHTML = '<div class="col l4 m12">' +
+                                    "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l4 m12">' +
+                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l4 m12">' +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
+                                    "</div>"
         }
         else if (input < 40 && input >= 30) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + "<br>" +
-                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+            resultWhen.innerHTML = '<div class="col l6 m12">' +
+                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l6 m12">' +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
+                                    "</div>"
         }
         else if (input < 60 && input >= 40) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+            resultWhen.innerHTML =  "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>`     
         }
                                     
 
@@ -172,7 +190,10 @@ export default function Input() {
                     )
                 }
                 
-                <div className="center-align result-when"></div>
+                <div className="row">
+                    <div className="center-align result-when"></div>
+                </div>
+                
 
             </div>
            
