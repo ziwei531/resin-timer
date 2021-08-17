@@ -38,7 +38,7 @@ export default function Input() {
         // console.log("To be regenerated: " + toBeRegenerated);
         // console.log("Total wait time: " + totalWaitTime);
 
-        let result = m.add(totalWaitTime, 'minutes').format('LTS');
+        let result = m.add(totalWaitTime, 'minutes').format('LT');
         setRefill(result);
 
         // console.log("Time it should be refilled: " + result);
