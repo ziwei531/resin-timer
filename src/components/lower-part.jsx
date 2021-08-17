@@ -7,12 +7,12 @@ export default function Lower() {
                 </p>
 
                 <p className="center-align flow-text">For your information: </p>
-                    <div className="bullets flow-text">
+                    <div className="bullets">
                         <ol>
-                            <li>20 resin is needed for one Domain or Leyline farming session.</li>
-                            <li>30 resin is needed for one discounted Weekly Boss farming session</li>
-                            <li>40 resin is needed for one Boss Enemies farming session or to make one Condensed Resin</li>
-                            <li>60 resin is needed for one Weekly Boss farming session.</li>
+                            <li className="flow-text">20 resin is needed for one Domain or Leyline farming session.</li>
+                            <li className="flow-text">30 resin is needed for one discounted Weekly Boss farming session</li>
+                            <li className="flow-text">40 resin is needed for one Boss Enemies farming session or to make one Condensed Resin</li>
+                            <li className="flow-text">60 resin is needed for one Weekly Boss farming session.</li>
                         </ol>
                     </div>
                 
