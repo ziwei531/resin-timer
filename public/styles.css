@@ -45,3 +45,8 @@ li {
     position: relative;
     bottom: 35px;
 }
+
+.resin-when {
+    display: flex;
+    justify-content: center;
+}

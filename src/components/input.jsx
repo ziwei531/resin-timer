@@ -25,6 +25,7 @@ export default function Input() {
             setResin(resinInputted);
             calculate();
             countDown();    
+            calculateWhen(resinInputted);
         }
     }
 
@@ -41,7 +42,7 @@ export default function Input() {
         let result = m.add(totalWaitTime, 'minutes').format('LT');
         setRefill(result);
 
-        // console.log("Time it should be refilled: " + result);
+        console.log("Time it should be refilled: " + result);
 
         // console.log("The m value = " + m)
         m = moment();
@@ -74,10 +75,59 @@ export default function Input() {
         }
     }
 
+    //calculate when the user's resin reaches 20, 30, 40, or 60
+    function calculateWhen(input) {
+        let m = moment();
+
+        let till20 = 20 - input; //what is the amount of resin needed to reach 20, 30, 40, 60
+        let till30 = 30 - input;
+        let till40 = 40 - input;
+        let till60 = 60 - input; 
+
+        let time20 = till20 * 8; //total minutes in order to wait until it reaches 20, 30, 40, 60
+        let time30 = till30 * 8;
+        let time40 = till40 * 8;
+        let time60 = till60 * 8;
+
+        console.log(time60)
+
+        let result20 = moment().add(time20, 'minutes').format('LT');
+        let result30 = moment().add(time30, 'minutes').format('LT');
+        let result40 = moment().add(time40, 'minutes').format('LT');
+        let result60 = moment().add(time60, 'minutes').format('LT');
+
+        if (input < 20) {
+            let resultWhen = document.querySelector('.result-when');
+            resultWhen.innerHTML = "<h4>20 Resin In: </h4>" + `<h1 class="result">${result20}</h1>` + "<br>" + 
+                                    "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + "<br>" +
+                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + "<br>" +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+        }
+        else if (input < 30 && input >= 20) {
+            let resultWhen = document.querySelector('.result-when');
+            resultWhen.innerHTML = "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + "<br>" +
+                                    "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + "<br>" +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+        }
+        else if (input < 40 && input >= 30) {
+            let resultWhen = document.querySelector('.result-when');
+            resultWhen.innerHTML = "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + "<br>" +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+        }
+        else if (input < 60 && input >= 40) {
+            let resultWhen = document.querySelector('.result-when');
+            resultWhen.innerHTML = "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + "<br>"
+        }
+                                    
 
 
-    // console.log(document.querySelector('.countdown'));
-    
+        console.log(result20);
+        console.log(result30);
+        console.log(result40);
+        console.log(result60);
+        
+    }
+
     return (
         <>
             <div className="container">
@@ -105,22 +155,25 @@ export default function Input() {
 
                 {
                     isInputted === true && 
-                    (<div className="result-area center-align">
+                    (
+                        <div className="result-area center-align">
 
-                        <h4>Current Resin: </h4>
-                        <h1 className="result">{Resin}</h1>
+                            <h4>Current Resin: </h4>
+                            <h1 className="result">{Resin}</h1>
 
-                        <h4>Fully Regenerated In: </h4>
-                        <h1 className="result countdown"></h1>
-                        
+                            <h4>Fully Regenerated In: </h4>
+                            <h1 className="result countdown"></h1>
+                            
 
-                        <h4>Full Refill At: </h4>
-                        <h1 className="result">{refill}</h1>
-                    </div>)
+                            <h4>Full Refill At: </h4>
+                            <h1 className="result">{refill}</h1>
+
+                        </div>
+                    )
                 }
                 
+                <div className="center-align result-when"></div>
 
-                
             </div>
            
         </>
