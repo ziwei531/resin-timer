@@ -8,21 +8,25 @@ let triggered = undefined;
 export default function Input() {
 
     const [resinInputted, setResinInputted] = useState("");
-    const [Resin, setResin] = useState("");
+    const [Resin, setResin] = useState(0);
     const [refill, setRefill] = useState("");
 
     function handleChange(event) {
-        let newValue = event.target.value;
+        let newValue = parseInt(event.target.value);
         setResinInputted(newValue);
     }
 
     function handleClick() {
+        let resin = resinInputted;
+        console.log(resin)
         if (isNaN(resinInputted) === true || resinInputted < 0 || resinInputted >= 160 || resinInputted === "") {
             alert("Please enter a value that is not lesser than 0 or greater/equal to 160");
         } 
         else {
             isInputted = true;
-            setResin(resinInputted);
+            console.log("This is the resin inputted: " + resinInputted);
+            setResin(resin);
+            console.log(`The Resin after calling setResin: ${Resin}` );
             calculate();
             countDown();    
             calculateWhen(resinInputted);
@@ -61,16 +65,19 @@ export default function Input() {
             let diffTime = futureTime - currentTime;
             let duration = moment.duration(diffTime, 'milliseconds');
 
-            console.log("This is the Resin: " + resinInputted);
+            
     
             triggered = setInterval(() => {
                 let countdown = document.querySelector('.countdown');
                 duration = moment.duration(duration - 1000, 'milliseconds');
-    
+                
+                
                 countdown.innerText = duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s";
                 if (duration.seconds() === 0) {
-                   setResin(parseInt(resinInputted) + 1);
+                   setResin(prevResin => prevResin + 1);
                 }
+
+                //note to future self. the timer will exceed 160 and the timer will go to negatives. fix it when im free.
             }, 1000);
         } 
         else {
@@ -146,7 +153,7 @@ export default function Input() {
         // console.log(result30);
         // console.log(result40);
         // console.log(result60);
-        
+
     }
 
     return (
