@@ -60,12 +60,17 @@ export default function Input() {
             let futureTime = m.add(totalWaitTime, 'minutes');
             let diffTime = futureTime - currentTime;
             let duration = moment.duration(diffTime, 'milliseconds');
+
+            console.log("This is the Resin: " + resinInputted);
     
             triggered = setInterval(() => {
                 let countdown = document.querySelector('.countdown');
                 duration = moment.duration(duration - 1000, 'milliseconds');
     
                 countdown.innerText = duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s";
+                if (duration.seconds() === 0) {
+                   setResin(parseInt(resinInputted) + 1);
+                }
             }, 1000);
         } 
         else {
