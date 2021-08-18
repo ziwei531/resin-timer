@@ -73,9 +73,9 @@ export default function Input() {
                 
                 
                 countdown.innerText = duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s";
-                if (duration.seconds() === 0) {
-                   setResin(prevResin => prevResin + 1);
-                }
+                // if (duration.minutes() % 8 === 0) {
+                //    setResin(prevResin => prevResin + 1);
+                // }
 
                 //note to future self. the timer will exceed 160 and the timer will go to negatives. fix it when im free.
             }, 1000);
