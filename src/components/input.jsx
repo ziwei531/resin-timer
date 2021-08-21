@@ -4,6 +4,7 @@ import moment from 'moment';
 let isInputted = false;
 let triggered = undefined;
 
+
 export default function Input() {
 
     const [resinInputted, setResinInputted] = useState(0);
@@ -29,8 +30,7 @@ export default function Input() {
 
     
     function countDown() {
-        let i = 0; //i've put an i variable here so that the first time the interval triggers, it won't increment the resin counter immediately. 
-
+        let i = false; //i've put an i variable here so that the first time the interval triggers, it won't increment the resin counter immediately. 
         if (!triggered) {
             const resin_cap = 160;
             const toBeRegenerated = resin_cap - Resin;
@@ -45,21 +45,24 @@ export default function Input() {
             triggered = setInterval(() => {
                 let countdown = document.querySelector('.countdown');
                 
+                //this is to trigger resin increment every 8 minutes. i variable is used here to ensure that the first input won't IMMEDIATELY trigger the counter
                 if (Resin === 160) {
                     clearInterval(triggered);
                     triggered = undefined;
                     alert('Your Resin is fully replenished!');
+                    i = false;
                 }
-                else if (duration % 480000 === 0 && i > 0) {
+                else if (duration % 480000 === 0 && i === true) {
                     if (Resin < 160) {
                         setResin(prevResin => prevResin + 1); //480000 = 8 minutes
                     }
                 }
+                else if (i !== true) {
+                    i = true;
+                }
 
                 duration = moment.duration(duration - 1000, 'milliseconds');
                 countdown.innerText = duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s";
-
-                i++
                 
                 //note to future self. the timer will exceed 160 and the timer will go to negatives. fix it when im free.
             }, 1000);
