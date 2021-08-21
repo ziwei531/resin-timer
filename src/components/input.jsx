@@ -1,82 +1,66 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 let isInputted = false;
 let triggered = undefined;
 
 export default function Input() {
 
-    const [resinInputted, setResinInputted] = useState("");
-    const [Resin, setResin] = useState(0);
+    const [resinInputted, setResinInputted] = useState(0);
+    const [Resin, setResin] = useState(resinInputted);
     const [refill, setRefill] = useState("");
-
-    function handleChange(event) {
-        let newValue = parseInt(event.target.value);
-        setResinInputted(newValue);
-    }
-
-    function handleClick() {
-        let resin = resinInputted;
-        console.log(resin)
-        if (isNaN(resinInputted) === true || resinInputted < 0 || resinInputted >= 160 || resinInputted === "") {
-            alert("Please enter a value that is not lesser than 0 or greater/equal to 160");
-        } 
-        else {
-            isInputted = true;
-            console.log("This is the resin inputted: " + resinInputted);
-            setResin(resin);
-            console.log(`The Resin after calling setResin: ${Resin}` );
-            calculate();
-            countDown();    
-            calculateWhen(resinInputted);
-        }
-    }
 
     // console.log(m.format('LTS')) // 2:48:10 PM <- looks something like this
 
+    
     function calculate() {
+        
         let m = moment();
-        let toBeRegenerated = 160 - resinInputted;
+        const resin_cap = 160;
+        let toBeRegenerated = resin_cap - resinInputted;
         let totalWaitTime = toBeRegenerated * 8;
-
-        // console.log("To be regenerated: " + toBeRegenerated);
-        // console.log("Total wait time: " + totalWaitTime);
-
         let result = m.add(totalWaitTime, 'minutes').format('LT');
         setRefill(result);
 
-        // console.log("Time it should be refilled: " + result);
-
-        // console.log("The m value = " + m)
-        m = moment();
+        // console.log("This is the resin inside the setinterval " + Resin);
         
+        m = moment();
     }
 
     
     function countDown() {
+        let i = 0; //i've put an i variable here so that the first time the interval triggers, it won't increment the resin counter immediately. 
+
         if (!triggered) {
-            let m = moment();
-            const toBeRegenerated = 160 - resinInputted;
+            const resin_cap = 160;
+            const toBeRegenerated = resin_cap - Resin;
             const totalWaitTime = toBeRegenerated * 8;
     
             let currentTime = moment();
-            let futureTime = m.add(totalWaitTime, 'minutes');
+            let futureTime = moment().add(totalWaitTime, 'minutes');
             let diffTime = futureTime - currentTime;
             let duration = moment.duration(diffTime, 'milliseconds');
 
-            
-    
+            // console.log(duration)
             triggered = setInterval(() => {
                 let countdown = document.querySelector('.countdown');
-                duration = moment.duration(duration - 1000, 'milliseconds');
                 
-                
-                countdown.innerText = duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s";
-                // if (duration.minutes() % 8 === 0) {
-                //    setResin(prevResin => prevResin + 1);
-                // }
+                if (Resin === 160) {
+                    clearInterval(triggered);
+                    triggered = undefined;
+                    alert('Your Resin is fully replenished!');
+                }
+                else if (duration % 480000 === 0 && i > 0) {
+                    if (Resin < 160) {
+                        setResin(prevResin => prevResin + 1); //480000 = 8 minutes
+                    }
+                }
 
+                duration = moment.duration(duration - 1000, 'milliseconds');
+                countdown.innerText = duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s";
+
+                i++
+                
                 //note to future self. the timer will exceed 160 and the timer will go to negatives. fix it when im free.
             }, 1000);
         } 
@@ -89,8 +73,6 @@ export default function Input() {
 
     //calculate when the user's resin reaches 20, 30, 40, or 60
     function calculateWhen(input) {
-        let m = moment();
-
         let till20 = 20 - input; //what is the amount of resin needed to reach 20, 30, 40, 60
         let till30 = 30 - input;
         let till40 = 40 - input;
@@ -100,8 +82,6 @@ export default function Input() {
         let time30 = till30 * 8;
         let time40 = till40 * 8;
         let time60 = till60 * 8;
-
-        // console.log(time60)
 
         let result20 = moment().add(time20, 'minutes').format('LT');
         let result30 = moment().add(time30, 'minutes').format('LT');
@@ -148,12 +128,24 @@ export default function Input() {
             let resultWhen = document.querySelector('.result-when');
             resultWhen.innerHTML =  "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>`     
         }
-                                    
-        // console.log(result20);
-        // console.log(result30);
-        // console.log(result40);
-        // console.log(result60);
 
+    }
+
+    function handleChange(event) {
+        let newValue = parseInt(event.target.value);
+        setResinInputted(newValue);
+    }
+
+    function handleClick() {
+        if (isNaN(resinInputted) === true || resinInputted < 0 || resinInputted >= 160 || resinInputted === "") {
+            alert("Please enter a value that is not lesser than 0 or greater/equal to 160");
+        } 
+        else {
+            isInputted = true;
+            calculate();
+            setResin(resinInputted);    
+            calculateWhen(resinInputted);
+        }
     }
 
     return (
@@ -180,6 +172,7 @@ export default function Input() {
                     Calculate
                     </button>   
                 </div>
+                
 
                 {
                     isInputted === true && 
@@ -191,7 +184,7 @@ export default function Input() {
 
                             <h4>Fully Regenerated In: </h4>
                             <h1 className="result countdown"></h1>
-                            
+                            {countDown()}
 
                             <h4>Full Refill At: </h4>
                             <h1 className="result">{refill}</h1>
