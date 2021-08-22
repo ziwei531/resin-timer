@@ -149,7 +149,23 @@ export default function Input() {
             setResin(resinInputted);    
             calculateWhen(resinInputted);
         }
+
+    } 
+
+    function handleKeyDown(event) {
+        if (event.keyCode === 13) { 
+            if (isNaN(resinInputted) === true || resinInputted < 0 || resinInputted >= 160 || resinInputted === "") {
+                alert("Please enter a value that is not lesser than 0 or greater/equal to 160");
+            } 
+            else {
+                isInputted = true;
+                calculate();
+                setResin(resinInputted);    
+                calculateWhen(resinInputted);
+            }
+        }
     }
+
 
     return (
         <>
@@ -164,6 +180,7 @@ export default function Input() {
                         className="input-number" 
                         type="number" 
                         onChange={handleChange}
+                        onKeyDown={handleKeyDown}
                     ></input>
                 </div>
 
