@@ -80,58 +80,89 @@ export default function Input() {
         let till30 = 30 - input;
         let till40 = 40 - input;
         let till60 = 60 - input; 
+        let till80 = 80 - input;
 
         let time20 = till20 * 8; //total minutes in order to wait until it reaches 20, 30, 40, 60
         let time30 = till30 * 8;
         let time40 = till40 * 8;
         let time60 = till60 * 8;
+        let time80 = till80 * 8;
 
         let result20 = moment().add(time20, 'minutes').format('LT');
         let result30 = moment().add(time30, 'minutes').format('LT');
         let result40 = moment().add(time40, 'minutes').format('LT');
         let result60 = moment().add(time60, 'minutes').format('LT');
+        let result80 = moment().add(time80, 'minutes').format('LT');
+        
 
+        //there are 12 grid spaces 
+        //to get the desired display output, let display output = d, m = the required number to be divided that needs to be entered into the grid(i)
+        //d = m / 12
+        //m = d / 12 
+
+        // to find what value to put for l, m, s, whatever on the grid, find the quotient. the quotient itself is needed.
         if (input < 20) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = '<div class="col l3 m12">' +
+            resultWhen.innerHTML = '<div class="col l3 m12 s12">' +
                                     "<h4>20 Resin In: </h4>" + `<h1 class="result">${result20}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l3 m12">' +
+                                    '<div class="col l3 m12 s12">' +
                                     "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l3 m12">' +
+                                    '<div class="col l3 m12 s12">' +
                                     "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l3 m12">' +
+                                    '<div class="col l3 m12 s12">' +
                                     "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
+                                    '</div>' +
+                                    '<div class="col l3 m12 s12">' +
+                                    "<h4>80 Resin In: </h4>" + `<h1 class="result">${result80}</h1>` + 
                                     '</div>'
         }
         else if (input < 30 && input >= 20) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = '<div class="col l4">' +
+            resultWhen.innerHTML = '<div class="col l3 m12 s12">' +
                                     "<h4>30 Resin In: </h4>" + `<h1 class="result">${result30}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l4">' +
+                                    '<div class="col l3 m12 s12">' +
                                     "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l4">' +
+                                    '<div class="col l3 m12 s12">' +
                                     "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
-                                    "</div>"
+                                    "</div>" +
+                                    '<div class="col l3 m12 s12">' +
+                                    "<h4>80 Resin In: </h4>" + `<h1 class="result">${result80}</h1>` + 
+                                    '</div>'
         }
         else if (input < 40 && input >= 30) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML = '<div class="col l6 m12">' +
+            resultWhen.innerHTML = '<div class="col l4 m12 s12">' +
                                     "<h4>40 Resin In: </h4>" + `<h1 class="result">${result40}</h1>` + 
                                     '</div>' +
-                                    '<div class="col l6 m12">' +
+                                    '<div class="col l4 m12 s12">' +
                                     "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` + 
-                                    "</div>"
+                                    "</div>" +
+                                    '<div class="col l4 m12 s12">' +
+                                    "<h4>80 Resin In: </h4>" + `<h1 class="result">${result80}</h1>` + 
+                                    '</div>'
         }
         else if (input < 60 && input >= 40) {
             let resultWhen = document.querySelector('.result-when');
-            resultWhen.innerHTML =  "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>`     
+            resultWhen.innerHTML =  '<div class="col l6 m12 s12">' +
+                                    "<h4>60 Resin In: </h4>" + `<h1 class="result">${result60}</h1>` +
+                                    '</div>' +
+                                    '<div class="col l6 m12 s12">' +
+                                    "<h4>80 Resin In: </h4>" + `<h1 class="result">${result80}</h1>` + 
+                                    '</div>'
         }
-
+        else if (input < 80 && input >= 60) {
+            let resultWhen = document.querySelector('.result-when');
+            resultWhen.innerHTML = "<h4>80 Resin In: </h4>" + `<h1 class="result">${result80}</h1>` 
+        }
+        else if (input >= 80) {
+            let resultWhen = document.querySelector('.result-when');
+            resultWhen.innerHTML = "";
+        }
     }
 
     function handleChange(event) {
